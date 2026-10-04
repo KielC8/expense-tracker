@@ -1,7 +1,7 @@
 #Expense Tracker - Installment 2; Author: Ezekiel Cyrus D. Cuison
 print("=" * 40)
-print("\t     EXPENSE TRACKER")
-print("\tKnow where your money goes.")
+print("EXPENSE TRACKER".center(40))
+print("Know where your money goes.".center(40))
 print("=" * 40)
 
 print("\nMAIN MENU")
