@@ -1,79 +1,75 @@
 # Project: Expense Tracker
-# Installment 4: The Tracker Makes Decisions
+# Installment 5: The Menu Comes Alive
 # Author: Ezekiel Cyrus D. Cuison
 # Section: DIT 3-7
-# Description: Tracks two expenses and evaluates spending decisions and budget status.
+# Description: Tracks expenses using an interactive menu and evaluates budget status.
 
 print("=" * 40)
 print("\t\tEXPENSE TRACKER")
 print("\t\tKnow where your money goes.")
 print("=" * 40)
 
-print("\nMAIN MENU")
-print("\t[1] Add an expense\t\t(coming soon)")
-print("\t[2] View all expenses\t\t(coming soon)")
-print("\t[3] Show total spent\t\t(coming soon)")
-print("\t[4] Exit\t\t\t(coming soon)")
-
 name = input("\nWhat's your name? ")
-print(f"Welcome, {name}! Let's log two expenses.")
+tax_percent = int(input("Tax rate %? "))
+budget = float(input("Your budget? "))
+
+print(f"Welcome, {name}! Let's track your expenses.")
 
 subtotal = 0
+count = 0
 
-item1 = input("\nFirst expense? ")
-amount1 = float(input("Amount? "))
-subtotal += amount1
+while True:
+    print("\nMAIN MENU")
+    print("\t[1] Add an expense")
+    print("\t[2] View all expenses\t\t(coming soon)")
+    print("\t[3] Show total spent")
+    print("\t[4] Exit")
 
-if amount1 > 200:
-    print("  Huge expense - are you sure?")
-elif amount1 > 100:
-    print("  Big expense.")
-elif amount1 > 50:
-    print("  Moderate expense.")
-else:
-    print("  Small expense.")
+    choice = input("Choose 1-4: ")
 
-item2 = input("Second expense? ")
-amount2 = float(input("Amount? "))
-subtotal += amount2
+    if choice == "1":
+        amount = float(input("Amount? "))
+        subtotal += amount
+        count += 1
 
-if amount2 > 200:
-    print("  Huge expense - are you sure?")
-elif amount2 > 100:
-    print("  Big expense.")
-elif amount2 > 50:
-    print("  Moderate expense.")
-else:
-    print("  Small expense.")
+        if amount > 200:
+            print("  Huge expense - are you sure?")
+        elif amount > 100:
+            print("  Big expense.")
+        elif amount > 50:
+            print("  Moderate expense.")
+        else:
+            print("  Small expense.")
 
-if amount1 > 100 and amount2 > 100:
-    print("  Two big expenses in a row - slow down!")
+    elif choice == "2":
+        print("  Coming soon: the tracker can't remember each item yet.")
 
-average = subtotal / 2
+    elif choice == "3":
+        tax = subtotal * (tax_percent / 100)
+        total = subtotal + tax
+        left = budget - total
 
-tax_percent = int(input("Tax rate %? "))
-tax = subtotal * (tax_percent / 100)
-total = subtotal + tax
+        print("-" * 40)
+        print("SUMMARY")
+        print(f"Expenses:\t{count}")
+        print(f"Subtotal:\t${subtotal}")
+        print(f"Tax ({tax_percent:.1f}%):\t${tax}")
+        print(f"Grand total:\t${total}")
 
-budget = float(input("Your budget? "))
-over_budget = total > budget
-left = budget - total
+        if total > budget:
+            print(f"Over budget by ${total - budget}!")
+        elif total > budget * 0.90:
+            print(f"Careful: only ${left} left.")
+        else:
+            print(f"Within budget. ${left} left.")
 
-print("-" * 40)
-print("SUMMARY")
-print(f"\t- {item1}:\t${amount1}")
-print(f"\t- {item2}:\t${amount2}")
-print(f"Subtotal:\t${subtotal}")
-print(f"Average:\t${average}")
-print(f"Tax ({tax_percent:.1f}%):\t${tax}")
-print(f"Grand total:\t${total}")
+        print("-" * 40)
 
-if over_budget:
-    print(f"Over budget by ${total - budget}!")
-elif total > budget * 0.90:
-    print(f"Careful: only ${left} left.")
-else:
-    print(f"Within budget. ${left} left.")
+    elif choice == "4":
+        print(f"Goodbye, {name}!")
+        print("-" * 40)
+        print("Made by: Ezekiel Cyrus D. Cuison  |  Installment 5")
+        break
 
-print("-" * 40)
-print("Made by: Ezekiel Cyrus D. Cuison  |  Installment 4")
+    else:
+        print("  Please choose 1, 2, 3 or 4.")
